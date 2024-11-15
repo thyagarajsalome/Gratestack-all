@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop watch</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="stopwatch">
+      <h1 id="displayTime">00:00:00</h1>
+      <div class="buttons">
+        <img src="images/stop.png" />
+        <img src="images/start.png" />
+        <img src="images/reset.png" />
+      </div>
+    </div>
+    <script>
+      let [seconds, minutes, hours] = [0, 0, 0];
+      let displayTime = document.getElementById("displayTime");
+      let timer = null;
+
+      function stopwatch() {
+        seconds++;
+        if (seconds == 60) {
+          seconds = 0;
+          minutes++;
+          if (minutes == 60) {
+            minutes = 0;
+            hours++;
+          }
+        }
+
+        // Format time with leading zeros
+        let h = hours < 10 ? "0" + hours : hours;
+        let m = minutes < 10 ? "0" + minutes : minutes;
+        let s = seconds < 10 ? "0" + seconds : seconds;
+
+        displayTime.innerHTML = `${h}:${m}:${s}`;
+      }
+
+      function watchStart() {
+        if (timer === null) {
+          // Changed !== to ===
+          timer = setInterval(stopwatch, 1000);
+        }
+      }
+
+      function watchStop() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      function watchReset() {
+        clearInterval(timer);
+        [seconds, minutes, hours] = [0, 0, 0];
+        displayTime.innerHTML = "00:00:00";
+        timer = null;
+      }
+
+      // Add event listeners to the images
+      document
+        .querySelector('img[src="images/start.png"]')
+        .addEventListener("click", watchStart);
+      document
+        .querySelector('img[src="images/stop.png"]')
+        .addEventListener("click", watchStop);
+      document
+        .querySelector('img[src="images/reset.png"]')
+        .addEventListener("click", watchReset);
+    </script>
+  </body>
+</html>
