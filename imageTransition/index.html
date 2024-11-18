@@ -21,17 +21,17 @@
     </div>
 
     <script>
-      var ImgBox = document.querySelector(".img-box");
-      var imgWrap = document.querySelector(".img-wrap");
-      var originalImg = document.getElementById("originalImg");
-      var line = document.getElementById("line");
+      let ImgBox = document.querySelector(".img-box");
+      let imgWrap = document.querySelector(".img-wrap");
+      let originalImg = document.getElementById("originalImg");
+      let line = document.getElementById("line");
 
       originalImg.style.width = ImgBox.offsetWidth + "px";
 
-      var leftSpace = ImgBox.offsetLeft;
+      let leftSpace = ImgBox.offsetLeft;
 
       ImgBox.onmousemove = function (e) {
-        var boxWidth = e.pageX - leftSpace + "px";
+        let boxWidth = e.pageX - leftSpace + "px";
         imgWrap.style.width = boxWidth;
         line.style.left = boxWidth;
       };
